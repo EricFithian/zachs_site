@@ -2,7 +2,7 @@
 const express = require('express');
 const methodOverride = require('method-override')
 // configure the app settings (used by app.listen) for 4000 or Heroku
-const PORT = 4000 || process.env.PORT;
+const PORT = process.env.PORT || 4000;
 const controllers = require('./controllers')
 // Updated with the env vars
 

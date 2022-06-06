@@ -1,29 +1,21 @@
 // import express
 const express = require('express');
 const methodOverride = require('method-override')
-
+// configure the app settings (used by app.listen) for 4000 or Heroku
+const PORT = 4000 || process.env.PORT;
 const controllers = require('./controllers')
+
 // create instance
 const app = express();
 const bodyParser = require('body-parser')
-
-// db connection
-// require('./config/db.connection')
-app.use(bodyParser.json());
-
-// configure the app settings (used by app.listen)
-const PORT = 4000 || process.env.PORT;
 
 // app configs - app.set()
 app.set('view engine', 'ejs')
 
 /* 
-    EXPRESS Middleware - a later topic - this code will run for every route
+EXPRESS Middleware - a later topic - this code will run for every route
 */
-
-// first middleware - middleware executes for every request - 
-// express.static helps express find where certain files are located
-
+app.use(bodyParser.json());
 app.use(express.static('public'))
 
 // method override middleware
@@ -39,7 +31,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // CONTROLLERS 
 
-app.use('/blogs', controllers.blogs) // "products" router
+app.use('/tutorials', controllers.tutorials) // "products" router
 
 /* 
     EXPRESS Routing: express provides route methods that will intercept requests to the server:
@@ -56,7 +48,7 @@ app.use('/blogs', controllers.blogs) // "products" router
 
 // Products "Home" route 
 
-app.get('/', (request, response) => response.send(`Welcome to Zach's website!`))
+app.get('/', (request, response) => response.render(`home.ejs`))
 
 /* 
     EXPRESS Server: initializes the server; app.listen allows your computer to receive requests at http://localhost:4000/ 

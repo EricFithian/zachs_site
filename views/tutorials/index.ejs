@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include('../partials/head.ejs',{ pageName :  "All Tutorials" }) %>
+
+<body>
+
+    <%- include('../partials/nav.ejs')%>
+
+    <section>
+        <div>
+            <h2 class="title">All Tutorials</h2>
+        </div>
+    </section>
+
+    <main class="container">
+        <div>
+            <div>
+                <% for(let idx=0; idx < tutorials.length; idx++){ %>
+                    <% const tutorial=tutorials[idx] %>
+                        <div>
+                            <img class="card-image" src="<%= tutorial.thumbnail %>" alt="<%= tutorial.title %>" />
+                            <div class>
+                                <h3><%= tutorial.title %></h3>
+                            <p><%= tutorial.author %>
+                            <!-- add a delete form here  -->
+
+                        </p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

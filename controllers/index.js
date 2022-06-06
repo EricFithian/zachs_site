@@ -1,3 +1,3 @@
 module.exports = {
-    blogs: require('./tutorial'),
+    tutorials: require('./tutorial'),
 }

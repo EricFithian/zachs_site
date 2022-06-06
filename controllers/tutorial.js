@@ -9,7 +9,7 @@ router.get('/', async (req, res, next) => {
         const tutorials = await db.Tutorial.find({});
         const context = { tutorials }
         console.log(tutorials);
-        return res.render('tutorial_index.ejs', context);
+        return res.render('tutorials/index.ejs', context);
     } catch (error) {
         console.log(error);
         req.error = error;

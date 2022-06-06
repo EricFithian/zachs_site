@@ -18,12 +18,11 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/new', (req, res) => {
-    res.render('new.ejs')
+    res.render('tutorials/new.ejs')
 })
 
 router.post('/', async (req, res, next) => {
     try {
-        // console.log(`The req.body is ${req.body}`)
         const createdTutorial = await db.Tutorial.create(req.body);
         console.log(`The created product is ${createdTutorial}`)
         res.redirect('/blogs');

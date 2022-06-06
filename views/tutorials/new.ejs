@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <%- include('partials/head.ejs',{ pageName :  "Create New Tutorial" }) %>
+    <%- include('../partials/head.ejs',{ pageName :  "Create New Tutorial" }) %>
 
 <body>
 
-    <%- include('partials/nav.ejs')%>
-    <h1>New Product</h1>
-    <form method="POST" action="/products">
+    <%- include('../partials/nav.ejs')%>
+    <h1>New Tutorial</h1>
+    <form method="POST" action="/tutorials">
         <!-- method => POST - attach the data to post body rather than in the url query string(GET request) -->
         <!-- action => destination for the post req -->
         <div>
@@ -28,7 +28,9 @@
         </div>
         <div>
             <label for="body"> Body </label>
-            <input id="body" name="body" type="textarea" />
+            <input id="body" name="body" cols="40" 
+            rows="30" 
+            style="width:400px; height:200px;"  />
         </div>
         <input type="submit" value="Create new product">
     </form>

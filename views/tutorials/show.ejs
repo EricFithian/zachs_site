@@ -2,16 +2,21 @@
 <html lang="en">
 <%- include('../partials/head.ejs', { pageName: tutorial.title }) %>
 <body>
-    <%- include('partials/nav.ejs')%>
+    <%- include('../partials/nav.ejs')%>
     <!-- <h1>Show Page</h1> -->
     <!-- product object referenced by oneProduct -->
     <h1><%= tutorial.title %></h1>
     <h3><%= tutorial.header %></h3>
     <img class="show-image" src="<%=tutorial.thumbnail%>" alt="<%=tutorial.title %>"/>
+    <p><%= tutorial.body %></p>
+    <hr />
     <div>
         <a href="/tutorials/<%= tutorial._id %>/edit">Edit <%= tutorial.title %></a>
+        <form action="/reviews/ <%=reviews[i]._id%>?_method=DELETE" method="POST">
+            <input type="submit" value="delete review" />
+        </form>
     </div>
-
+    <hr />
     <section>
         <h2>Product Reviews</h2>
         <div>

@@ -35,12 +35,39 @@ router.post('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-        const foundTutorial = await db.Tutorial.findById(req.params);
+        const foundTutorial = await db.Tutorial.findById(req.params.id);
         console.log(`The found tutorial is ${foundTutorial}`)
         context = {
             tutorial: foundTutorial
         }
         res.render('tutorials/show.ejs', context)
+    } catch (error) {
+        console.log(error);
+        req.error = error;
+        return next();
+    }
+})
+
+router.get('/:id/edit', async (req, res, next) => {
+    try {
+        const foundTutorial = await db.Tutorial.findById(req.params.id);
+        console.log(`The found tutorial is ${foundTutorial}`)
+        context = {
+            tutorial: foundTutorial
+        }
+        res.render('tutorials/edit.ejs', context)
+    } catch (error) {
+        console.log(error);
+        req.error = error;
+        return next();
+    }
+})
+
+router.delete('/:id', async (req, res, next) => {
+    try {
+        const deletedTutorial = await db.Tutorial.findByIdAndDelete(req.params.id)
+        console.log(`The found tutorial is ${deletedTutorial}`)
+        res.redirect(`/tutorials`)
     } catch (error) {
         console.log(error);
         req.error = error;

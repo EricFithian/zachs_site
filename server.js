@@ -18,7 +18,7 @@ EXPRESS Middleware - a later topic - this code will run for every route
 */
 app.use(bodyParser.json());
 app.use(express.static('public'))
-
+app.use(methodOverride('_method'))
 // method override middleware
 // convert a get/post request to a delete (or put) request
 app.use(methodOverride('_method'))

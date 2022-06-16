@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head.ejs', { pageName: tutorial.title }) %>
+<body>
+    <%- include('partials/nav.ejs')%>
+    <!-- <h1>Show Page</h1> -->
+    <!-- product object referenced by oneProduct -->
+    <h1><%= tutorial.title %></h1>
+    <h3><%= tutorial.header %></h3>
+    <img class="show-image" src="<%=tutorial.thumbnail%>" alt="<%=tutorial.title %>"/>
+    <div>
+        <a href="/tutorials/<%= tutorial._id %>/edit">Edit <%= tutorial.title %></a>
+    </div>
+
+    <section>
+        <h2>Product Reviews</h2>
+        <div>
+            <h3>Create a review:</h3>
+            <!-- form here -->
+            <form method="POST" action="/reviews">
+                <input name="rating" type="number"/>
+                <input name="content" type="text" />
+                <input type="hidden" name="product" value="<%=tutorial._id%>"/>
+                <input type="submit" value="Share your thoughts..."/>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

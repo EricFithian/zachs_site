@@ -33,4 +33,19 @@ router.post('/', async (req, res, next) => {
     }
 })
 
+router.get('/:id', async (req, res, next) => {
+    try {
+        const foundTutorial = await db.Tutorial.findById(req.params);
+        console.log(`The found tutorial is ${foundTutorial}`)
+        context = {
+            tutorial: foundTutorial
+        }
+        res.render('tutorials/show.ejs', context)
+    } catch (error) {
+        console.log(error);
+        req.error = error;
+        return next();
+    }
+})
+
 module.exports = router

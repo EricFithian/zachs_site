@@ -19,13 +19,10 @@
                 <% for(let idx=0; idx < tutorials.length; idx++){ %>
                     <% const tutorial=tutorials[idx] %>
                         <div>
+                            <a href="<%= tutorial._id %>"><h1><%= tutorial.title %></h1></a>
                             <img class="card-image" src="<%= tutorial.thumbnail %>" alt="<%= tutorial.title %>" />
                             <div class>
-                                <h3><%= tutorial.title %></h3>
-                            <p><%= tutorial.author %>
-                            <!-- add a delete form here  -->
-
-                        </p>
+                            <p><%= tutorial.author %></p>
                     </div>
                 <% } %>
             </div>

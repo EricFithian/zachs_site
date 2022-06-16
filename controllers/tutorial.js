@@ -25,7 +25,7 @@ router.post('/', async (req, res, next) => {
     try {
         const createdTutorial = await db.Tutorial.create(req.body);
         console.log(`The created product is ${createdTutorial}`)
-        res.redirect('/blogs');
+        res.redirect('/tutorials');
     } catch (error) {
         console.log(error);
         req.error = error;

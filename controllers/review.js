@@ -3,7 +3,7 @@ const router = express.Router();
 
 const db = require('../models/index')
 
-router.post('/reviews', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     try {
         const createdReview = await db.Review.create(req.body);
         console.log(`The created review is ${createdReview}`)

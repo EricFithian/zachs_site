@@ -1,5 +1,6 @@
 // import express
 const express = require('express');
+// This is something useless I'm adding as a comment
 const methodOverride = require('method-override')
 // configure the app settings (used by app.listen) for 4000 or Heroku
 const PORT = process.env.PORT || 4000;

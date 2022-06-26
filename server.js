@@ -34,6 +34,7 @@ app.use(express.urlencoded({ extended: false }))
 // CONTROLLERS 
 
 app.use('/tutorials', controllers.tutorials) // "products" router
+app.use('/reviews', controllers.reviews) // "products" router
 
 /* 
     EXPRESS Routing: express provides route methods that will intercept requests to the server:

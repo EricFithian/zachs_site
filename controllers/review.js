@@ -6,8 +6,8 @@ const db = require('../models/index')
 router.post('/', async (req, res, next) => {
     try {
         const createdReview = await db.Review.create(req.body);
-        console.log(`The created review is ${createdReview}`)
-        res.redirect('/tutorials');
+        console.log(`The created review is ${createdReview.tutorial}`)
+        res.redirect(`/tutorials/${createdReview.tutorial}`);
     } catch (error) {
         console.log(error);
         req.error = error;

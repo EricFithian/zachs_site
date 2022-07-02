@@ -36,9 +36,12 @@ router.post('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const foundTutorial = await db.Tutorial.findById(req.params.id);
+        const foundReviews = await db.Review.find({tutorial: foundTutorial})
+        console.log(foundReviews)
         console.log(`The found tutorial is ${foundTutorial}`)
         context = {
-            tutorial: foundTutorial
+            tutorial: foundTutorial,
+            reviews: foundReviews,
         }
         res.render('tutorials/show.ejs', context)
     } catch (error) {

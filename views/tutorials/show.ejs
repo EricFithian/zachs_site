@@ -16,16 +16,31 @@
     <hr />
     <section>
         <h2>Product Reviews</h2>
+        <% let average = 0 %>
+        <% for(let idx=0; idx < reviews.length; idx++){ %>
+            <% const review=reviews[idx] %>
+            <% average += review.stars %>
+                <div>
+                    <h3>Name: <%= review.name %></h3>
+                    <h3>Comment: <%= review.comment %></h3>
+                    <h3>Rating: <%= review.stars %></h3>
+                    <hr />
+                    <br>
+                </div>
+            <% } %>
+            <p>Average rating: <%= reviews.length ? (average / reviews.length).toFixed(2) : 0 %></p>
         <div>
             <h3>Create a review:</h3>
             <!-- form here -->
             <form method="POST" action="/reviews">
-                <input name="rating" type="number" placeholder="Rating"/>
-                <input name="name" type="text" />
-                <input name="comment" type="text" />
+                <input name="stars" type="number" placeholder="Stars"/>
+                <input name="name" type="text" placeholder="Name" />
+                <input name="comment" type="text" placeholder="Comment"/>
                 <input type="hidden" name="tutorial" value="<%=tutorial._id%>"/>
                 <input type="submit" value="Share your thoughts..."/>
             </form>
+            <hr />
+            <br />
         </div>
     </section>
 </body>

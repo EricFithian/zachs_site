@@ -15,4 +15,16 @@ router.post('/', async (req, res, next) => {
     }
 })
 
+router.delete('/:id', async (req, res, next) => {
+    try {
+        const deletedReview = await db.Review.findByIdAndDelete(req.params.id)
+        console.log(`The found tutorial is ${deletedReview}`)
+        res.redirect(`/tutorials`)
+    } catch (error) {
+        console.log(error);
+        req.error = error;
+        return next();
+    }
+})
+
 module.exports = router;

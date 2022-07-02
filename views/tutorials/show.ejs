@@ -24,6 +24,9 @@
                     <h3>Name: <%= review.name %></h3>
                     <h3>Comment: <%= review.comment %></h3>
                     <h3>Rating: <%= review.stars %></h3>
+                    <form method="POST" action="/reviews/<%= tutorial._id %>?_method=DELETE">            <!-- "/products/0?_method=DELETE" -->
+                        <input type="submit" value="Delete Review"/>
+                    </form>
                     <hr />
                     <br>
                 </div>

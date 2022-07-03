@@ -78,4 +78,14 @@ router.delete('/:id', async (req, res, next) => {
     }
 })
 
+router.put('/:id', async (req, res) => {
+    try {
+        let updatedTutorial = await db.Tutorial.findByIdAndUpdate(req.params.id, req.body)
+        console.log(`The updated tutorial is ${updatedTutorial}`)
+        res.redirect(`/tutorials/${req.params.id}`)
+    } catch (error) {
+        res.status(400).json(error);
+    }
+})
+
 module.exports = router

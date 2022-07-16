@@ -12,3 +12,8 @@
     text-align: center;
     font-weight: 200;
 }
+
+body {
+    background: url("https://i.imgur.com/KPVlevq_d.webp?maxwidth=760&fidelity=grand");
+    background-size: contain;
+}   

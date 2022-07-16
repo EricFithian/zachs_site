@@ -1,0 +1,14 @@
+* {
+    background-color: black;
+    color: white;
+}
+
+.title {
+    color: white;
+}
+
+.homepage {
+    font-size: xx-large;
+    text-align: center;
+    font-weight: 200;
+}

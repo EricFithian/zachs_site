@@ -12,7 +12,20 @@ const app = express();
 const bodyParser = require('body-parser')
 
 // app configs - app.set()
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
+var multer = require('multer');
+
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+});
+
+var upload = multer({ storage: storage });
+
 
 /* 
 EXPRESS Middleware - a later topic - this code will run for every route
@@ -35,6 +48,39 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use('/tutorials', controllers.tutorials) // "products" router
 app.use('/reviews', controllers.reviews) // "products" router
+
+app.post('/uploadfile', (req, res, next) => {
+    // create an incoming form object
+    var form = new formidable.IncomingForm();
+    // specify that we want to allow the user to upload multiple files in a single request
+    form.multiples = true;
+    // store all uploads in the /uploads directory
+    form.uploadDir = path.basename(path.dirname('/uploads/json_files/'))
+    // every time a file has been uploaded successfully,
+    // rename it to it's orignal name
+    form.on('file', function(field, file) {
+        fs.rename(file.path, path.join(form.uploadDir, file.name), function(err){
+            if (err) throw err;
+            //console.log('renamed complete: '+file.name);
+            const file_path = '/uploads/'+file.name
+        });
+    });
+    // log any errors that occur
+    form.on('error', function(err) {
+        console.log('An error has occured: \n' + err);
+    });
+    // once all the files have been uploaded, send a response to the client
+    form.on('end', function() {
+        //res.end('success');
+        res.statusMessage = "Process cashabck initiated";
+        res.statusCode = 200;
+        res.redirect('/')
+        res.end()
+    });
+    // parse the incoming request containing the form data
+    form.parse(req);
+});
+
 
 /* 
     EXPRESS Routing: express provides route methods that will intercept requests to the server:

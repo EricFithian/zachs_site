@@ -1,5 +1,19 @@
 const express = require('express')
 const router = express.Router();
+var fs = require('fs');
+var path = require('path');
+var multer = require('multer');
+require('dotenv/config');
+var upload = multer({ storage: storage });
+
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+});
 
 const db = require('../models/index')
 
@@ -21,9 +35,21 @@ router.get('/new', (req, res) => {
     res.render('tutorials/new.ejs')
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', upload.single('image'), async (req, res, next) => {
     try {
-        const createdTutorial = await db.Tutorial.create(req.body);
+        console.log(req)
+        const myTutorial = {
+            name: req.body.author,
+            desc: req.body.thumbnail,
+            upload_image: {
+                data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+                contentType: 'image/png'
+            },
+            title: req.body.title,
+            header: req.body.header,
+            body: req.body.body,
+        }
+        const createdTutorial = await db.Tutorial.create(myTutorial);
         console.log(`The created product is ${createdTutorial}`)
         res.redirect('/tutorials');
     } catch (error) {

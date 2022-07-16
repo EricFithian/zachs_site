@@ -10,6 +10,10 @@ const tutorialSchema = new mongoose.Schema({
     thumbnail: {
         type: String,
     },
+    upload_image: {
+        data: Buffer,
+        contentType: String
+    },
     title: {
         type: String,
         required: [true, 'title cannot be empty!']
